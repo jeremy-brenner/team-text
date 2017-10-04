@@ -1,14 +1,16 @@
 const fs = require('fs');
 
-function addContactRow(name='',number='') {   
+function addContactRow(name='',number='',row) {  
+  const sendSwitch = $(`<span class="switch switch-small"><input type="checkbox" class="switch" id="switch-${row}"><label for="switch-${row}"></label></span>`);
   const nameField = $(`<span class='name input' contenteditable='true'>${name}</span>`);
   const numberField = $(`<span class='number input' contenteditable='true'>${number}</span>`)
   const removeButton = $("<span class='remove button'>Remove</span>");
-  const contactRow = $("<div class='contact'></div>");
-  contactRow.append(nameField).append(numberField).append(removeButton);
+  const contactRow = $(`<div class='contact input-single' id='row-${row}'></div>`);
+  contactRow.append(sendSwitch).append(nameField).append(numberField).append(removeButton);
   $('#contacts .contact_list').append(contactRow);
   numberField.on('input', saveContactData );
   nameField.on('input', saveContactData );
+  sendSwitch.find('input').click(doSwitch);
   removeButton.click( () => { 
     contactRow.remove();
     saveContactData();
@@ -26,7 +28,8 @@ function contactData() {
   return $('#contacts .contact_list .contact').toArray().map( el => { 
     return {
       name: $(el).find('.name').text(),
-      number: $(el).find('.number').text() 
+      number: $(el).find('.number').text(),
+      selected: $(el).find('.switch input').is(':checked')
     }
   });
 }
@@ -37,12 +40,28 @@ function newContact() {
 
 function loadContacts() {
   const contacts = require('../data/contacts.json');
-  contacts.forEach( contact => {
-     addContactRow(contact.name, contact.number);
+  contacts.forEach( (contact,row) => {
+     addContactRow(contact.name, contact.number,row);
   });
+}
+
+function selectedContacts() {
+  return contactData().filter( c => c.selected );
+}
+
+function doSwitch() {
+    $('#send_message')
+      .prop('disabled',selectedContacts().length === 0 )
+      .text(`Send message to ${selectedContacts().length} recipients`);
+}
+
+function clearSelectedContacts() {
+  $('#contacts .contact_list input:checkbox:checked').prop('checked', false);
+  doSwitch();
 }
 
 $('#new_contact').click(newContact);
 loadContacts();
+doSwitch();
 
-module.exports = { contactData };
+module.exports = { selectedContacts, clearSelectedContacts };
