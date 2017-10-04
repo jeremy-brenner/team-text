@@ -39,7 +39,12 @@ function newContact() {
 }
 
 function loadContacts() {
-  const contacts = require('../data/contacts.json');
+  let contacts;
+  try {
+    contacts = require('../data/contacts.json');
+  } catch(e) {
+    contacts = [];
+  }
   contacts.forEach( (contact,row) => {
      addContactRow(contact.name, contact.number,row);
   });
