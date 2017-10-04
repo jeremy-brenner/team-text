@@ -1,0 +1,23 @@
+{
+  "name": "team-text",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeremy-brenner/team-text.git"
+  },
+  "author": "Jeremy Brenner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeremy-brenner/team-text/issues"
+  },
+  "homepage": "https://github.com/jeremy-brenner/team-text#readme",
+  "dependencies": {
+    "aws-sdk": "^2.126.0",
+    "electron": "^1.7.8"
+  }
+}
