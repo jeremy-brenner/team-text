@@ -1,4 +1,5 @@
 const fs = require('fs');
+const storage = require('electron-json-storage');
 
 function addContactRow(name='',number='',row) {  
   const sendSwitch = $(`<span class="switch switch-small"><input type="checkbox" class="switch" id="switch-${row}"><label for="switch-${row}"></label></span>`);
@@ -18,7 +19,7 @@ function addContactRow(name='',number='',row) {
 }
 
 function saveContactData() {
-  fs.writeFile('./data/contacts.json', JSON.stringify(contactData()), (err) => {
+  storage.set('contacts', contactData(), (err) => {
     if (err) throw err;
     console.log('The file has been saved!');
   });
@@ -39,14 +40,12 @@ function newContact() {
 }
 
 function loadContacts() {
-  let contacts;
-  try {
-    contacts = require('../data/contacts.json');
-  } catch(e) {
-    contacts = [];
-  }
-  contacts.forEach( (contact,row) => {
-     addContactRow(contact.name, contact.number,row);
+  storage.get('contacts', (err,contacts) => {
+    if( contacts.length ){
+      contacts.forEach( (contact,row) => {
+        addContactRow(contact.name, contact.number,row);
+      });
+    }
   });
 }
 
