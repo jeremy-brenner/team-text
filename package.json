@@ -5,7 +5,10 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "pack:osx && pack:win",
+    "pack:osx": "electron-packager . \"TeamText\" --out=dist/osx --platform=darwin --arch=x64 --version=0.36.2 --icon=assets/osx/logo.icns --ignore=dist --ignore=data/*",
+    "pack:win": "electron-packager . \"TeamText\" --out=dist/win --platform=win32 --arch=ia32 --version=0.36.2 --icon=assets/win/logo.ico --ignore=dist --ignore=data/*"
   },
   "repository": {
     "type": "git",
@@ -19,7 +22,11 @@
   "homepage": "https://github.com/jeremy-brenner/team-text#readme",
   "dependencies": {
     "aws-sdk": "^2.126.0",
-    "electron": "^1.7.8",
+    "electron-json-storage": "^3.1.1",
     "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "electron": "^1.7.8",
+    "electron-packager": "^9.1.0"
   }
 }
