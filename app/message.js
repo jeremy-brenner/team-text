@@ -1,5 +1,7 @@
 const AWS = require('aws-sdk');
-AWS.config.loadFromPath('./data/credentials.json');
+const creds = require('../data/credentials.json');
+AWS.config = new AWS.Config(creds);
+console.log(AWS.config);
 const sns = new AWS.SNS({apiVersion: '2010-03-31'});
 
 function sendMessageTo(contacts) {

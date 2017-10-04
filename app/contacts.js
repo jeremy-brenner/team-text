@@ -1,4 +1,3 @@
-const fs = require('fs');
 const storage = require('electron-json-storage');
 
 function addContactRow(name='',number='',row) {  
