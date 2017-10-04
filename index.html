@@ -3,11 +3,46 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <style>
+	  body { margin: 0; }
+      #contacts, #message, #head {
+          margin: 10px;
+      }
+      .button {
+          display: inline-block;
+          border: 1px solid black;
+      }
+      .input {
+          display: inline-block;
+          border: 1px solid blue;
+          width: 150px;
+          height: 30px;
+      }
+      .message {
+          width: 300px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+      <div id='head'>
+        <h1>Team Text</h1>
+      </div>
+      <div id='message'>
+        <h2>Message</h2>
+        <div class='message input' contenteditable="true"></div>
+        <div id='send_message' class='button'>Send Message</div>
+      </div>
+      <div id='contacts'>
+          <h2>Recipients</h2>
+          <div class='contact_list'>
+
+          </div>
+          <div id='new_contact' class='button'>
+              New Contact
+          </div>
+      </div>
   </body>
+  <script>
+    require('./renderer.js')
+  </script>
 </html>
