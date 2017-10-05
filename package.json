@@ -7,8 +7,8 @@
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "pack:osx && pack:win",
-    "pack:osx": "electron-packager . \"TeamText\" --out=dist/osx --platform=darwin --arch=x64 --version=0.36.2 --icon=assets/osx/logo.icns --ignore=dist --ignore=data/*",
-    "pack:win": "electron-packager . \"TeamText\" --out=dist/win --platform=win32 --arch=ia32 --version=0.36.2 --icon=assets/win/logo.ico --ignore=dist --ignore=data/*"
+    "pack:osx": "electron-packager . \"TeamText\" --out=dist/osx --platform=darwin --arch=x64 --version=0.36.2 --icon=assets/osx/logo.icns --ignore=^/dist --ignore=^/data/.*",
+    "pack:win": "electron-packager . \"TeamText\" --out=dist/win --platform=win32 --arch=ia32 --version=0.36.2 --icon=assets/win/logo.ico --ignore=^/dist --ignore=^/data/.*"
   },
   "repository": {
     "type": "git",
